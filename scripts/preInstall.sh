@@ -17,3 +17,45 @@ cat <<EOT > ./servers.json
     }
 }
 EOT
+
+
+cat /opt/elestio/startPostfix.sh > post.txt
+filename="./post.txt"
+
+SMTP_LOGIN=""
+SMTP_PASSWORD=""
+
+while IFS= read -r line; do
+  values=$(echo "$line" | grep -o '\-e [^ ]*' | sed 's/-e //')
+
+  while IFS= read -r value; do
+    if [[ $value == RELAYHOST_USERNAME=* ]]; then
+      SMTP_LOGIN=${value#*=}
+    elif [[ $value == RELAYHOST_PASSWORD=* ]]; then
+      SMTP_PASSWORD=${value#*=}
+    fi
+  done <<< "$values"
+
+done < "$filename"
+
+cat <<EOT > ./config.exs
+
+import Config
+
+config :pleroma, :instance,
+  registrations_open: true,
+  federating: true
+
+config :pleroma, Pleroma.Emails.Mailer,
+  enabled: true,
+  adapter: Swoosh.Adapters.SMTP,
+  relay: "tuesday.mxrouting.net",
+  username: "${SMTP_LOGIN}",
+  password: "${SMTP_PASSWORD}",
+  port: 25,
+  ssl: false,
+  auth: :always
+
+EOT
+
+rm post.txt

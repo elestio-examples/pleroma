@@ -47,7 +47,7 @@ environments:
   - key: "INSTANCE_NAME"
     value: "Pleroma"
   - key: "NOTIFY_EMAIL"
-    value: "pleroma+[EMAIL]"
+    value: "[DOMAIN]@vm.elestio.app"
   - key: "DOMAIN"
     value: "[CI_CD_DOMAIN]"
   - key: "PORT"
