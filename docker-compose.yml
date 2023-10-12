@@ -1,0 +1,43 @@
+version: "3.3"
+
+services:
+  pleroma:
+    image: git.pleroma.social:5050/pleroma/pleroma:${SOFTWARE_VERSION_TAG}
+    hostname: "pleroma"
+    labels:
+      - "org.label-schema.group=pleroma"
+    restart: always
+    env_file: ./.env
+    depends_on:
+      - pleroma-db
+    ports:
+      - "172.17.0.1:3226:4000"
+    volumes:
+      - ./storage/pleroma/config.exs:/var/lib/pleroma/config.exs
+      - ./storage/pleroma/uploads:/var/lib/pleroma/uploads
+
+  pleroma-db:
+    image: elestio/postgres:15
+    hostname: "pleroma-db"
+    labels:
+      - "com.centurylinklabs.watchtower.enable=False"
+      - "org.label-schema.group=pleroma"
+    restart: always
+    env_file: ./.env
+    ports:
+      - "172.17.0.1:57249:5432"
+    volumes:
+      - ./storage/pleroma-db/pgdata:/var/lib/postgresql/data
+      - ./storage/pleroma-db/pginit:/docker-entrypoint-initdb.d
+
+  pgadmin4:
+    image: dpage/pgadmin4:${SOFTWARE_VERSION_TAG}
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${ADMIN_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${ADMIN_PASSWORD}
+      PGADMIN_LISTEN_PORT: 8080
+    ports:
+      - "172.17.0.1:55871:8080"
+    volumes:
+      - ./servers.json:/pgadmin4/servers.json
