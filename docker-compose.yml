@@ -3,7 +3,7 @@ version: "3.3"
 services:
   pleroma:
     user: 0:0
-    image: ghcr.io/explodingcamera/pleroma:stable
+    image: elestio4test/pleroma:latest
     restart: always
     hostname: "pleroma"
     labels:

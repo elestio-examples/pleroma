@@ -56,6 +56,8 @@ config :pleroma, Pleroma.Emails.Mailer,
   ssl: false,
   auth: :always
 
+config :pleroma, configurable_from_database: true
+
 EOT
 
 rm post.txt
