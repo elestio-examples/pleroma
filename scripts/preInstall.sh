@@ -44,7 +44,9 @@ import Config
 
 config :pleroma, :instance,
   registrations_open: true,
-  federating: true
+  invites_enabled: true,
+  federating: true,
+  allow_relay: true
 
 config :pleroma, Pleroma.Emails.Mailer,
   enabled: true,
