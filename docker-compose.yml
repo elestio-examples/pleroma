@@ -2,8 +2,8 @@ version: "3.3"
 
 services:
   pleroma:
-    user: 0:0
-    image: ghcr.io/explodingcamera/pleroma:stable
+    # user: 0:0
+    image: git.pleroma.social:5050/pleroma/pleroma:latest
     restart: always
     hostname: "pleroma"
     labels:
@@ -14,9 +14,9 @@ services:
     ports:
       - "172.17.0.1:3226:4000"
     volumes:
-      - ./storage/pleroma//uploads:/data/uploads
-      - ./storage/pleroma//static:/data/static
-      - ./config.exs:/data/config.exs
+      - ./storage/pleroma/uploads:/var/lib/pleroma/uploads
+      # - ./storage/pleroma/static:/data/static
+      - ./config.exs:/var/lib/pleroma/config.exs
 
   pleroma-db:
     image: elestio/postgres:15
