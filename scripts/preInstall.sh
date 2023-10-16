@@ -60,6 +60,9 @@ config :pleroma, Pleroma.Emails.Mailer,
 
 config :pleroma, configurable_from_database: true
 
+config :pleroma, :http,
+  proxy_url: "172.17.0.1:3226"
+
 EOT
 
 rm post.txt
