@@ -60,8 +60,12 @@ config :pleroma, Pleroma.Emails.Mailer,
 
 config :pleroma, configurable_from_database: true
 
-config :pleroma, :http,
-  proxy_url: "172.17.0.1:3226"
+config :pleroma, :media_proxy,
+      enabled: true,
+      proxy_opts: [
+            redirect_on_failure: true
+      ],
+      base_url: "https://${DOMAIN}"
 
 EOT
 
