@@ -3,7 +3,7 @@ version: "3.3"
 services:
   pleroma:
     # user: 0:0
-    image: git.pleroma.social:5050/pleroma/pleroma:latest
+    image: elestio4test/pleroma:latest
     restart: always
     hostname: "pleroma"
     labels:
