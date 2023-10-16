@@ -5,4 +5,4 @@ set -o allexport; source .env; set +o allexport;
 echo "Waiting for software to be ready ..."
 sleep 250s;
 
-echo 'y' | docker-compose exec -T pleroma ./cli.sh user new root ${ADMIN_EMAIL} --admin --password ${ADMIN_PASSWORD}
+echo 'y' | docker-compose exec -T pleroma ./cli.sh user new admin ${ADMIN_EMAIL} --admin --password ${ADMIN_PASSWORD}

@@ -73,7 +73,7 @@ lifeCycleConfig:
 webUI:
   - url: "https://[CI_CD_DOMAIN]"
     label: "Pleroma"
-    login: "[ADMIN_EMAIL]"
+    login: admin"
     password: "[ADMIN_PASSWORD]"
   - url: "https://[CI_CD_DOMAIN]:49371"
     label: "PgAdmin"
