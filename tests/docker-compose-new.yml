@@ -16,7 +16,7 @@ services:
     volumes:
       - ./storage/pleroma//uploads:/data/uploads
       - ./storage/pleroma//static:/data/static
-      - ./config.exs:/data/config.exs
+      # - ./config.exs:/data/config.exs
 
   pleroma-db:
     image: elestio/postgres:15
