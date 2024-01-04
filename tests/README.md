@@ -46,50 +46,50 @@ You can access the Web UI at: `http://your-domain:3226`
 
 Here are some example snippets to help you get started creating a container.
 
-  version: "3.3"
+    version: "3.3"
 
-  services:
-    pleroma:
-      user: 0:0
-      image: elestio4test/pleroma:${SOFTWARE_VERSION_TAG}
-      restart: always
-      hostname: "pleroma"
-      labels:
-        - "org.label-schema.group=pleroma"
-      env_file: ./.env
-      depends_on:
-        - pleroma-db
-      ports:
-        - "172.17.0.1:3226:4000"
-      volumes:
-        - ./storage/pleroma//uploads:/data/uploads
-        - ./storage/pleroma//static:/data/static
-        - ./config.exs:/data/config.exs
+    services:
+      pleroma:
+        user: 0:0
+        image: elestio4test/pleroma:${SOFTWARE_VERSION_TAG}
+        restart: always
+        hostname: "pleroma"
+        labels:
+          - "org.label-schema.group=pleroma"
+        env_file: ./.env
+        depends_on:
+          - pleroma-db
+        ports:
+          - "172.17.0.1:3226:4000"
+        volumes:
+          - ./storage/pleroma//uploads:/data/uploads
+          - ./storage/pleroma//static:/data/static
+          - ./config.exs:/data/config.exs
 
-    pleroma-db:
-      image: elestio/postgres:15
-      restart: always
-      hostname: "pleroma-db"
-      labels:
-        - "com.centurylinklabs.watchtower.enable=False"
-        - "org.label-schema.group=pleroma"
-      env_file: ./.env
-      ports:
-        - "172.17.0.1:57249:5432"
-      volumes:
-        - ./storage/pleroma-db/pgdata:/var/lib/postgresql/data
+      pleroma-db:
+        image: elestio/postgres:15
+        restart: always
+        hostname: "pleroma-db"
+        labels:
+          - "com.centurylinklabs.watchtower.enable=False"
+          - "org.label-schema.group=pleroma"
+        env_file: ./.env
+        ports:
+          - "172.17.0.1:57249:5432"
+        volumes:
+          - ./storage/pleroma-db/pgdata:/var/lib/postgresql/data
 
-    pgadmin4:
-      image: dpage/pgadmin4:latest
-      restart: always
-      environment:
-        PGADMIN_DEFAULT_EMAIL: ${ADMIN_EMAIL}
-        PGADMIN_DEFAULT_PASSWORD: ${ADMIN_PASSWORD}
-        PGADMIN_LISTEN_PORT: 8080
-      ports:
-        - "172.17.0.1:55871:8080"
-      volumes:
-        - ./servers.json:/pgadmin4/servers.json
+      pgadmin4:
+        image: dpage/pgadmin4:latest
+        restart: always
+        environment:
+          PGADMIN_DEFAULT_EMAIL: ${ADMIN_EMAIL}
+          PGADMIN_DEFAULT_PASSWORD: ${ADMIN_PASSWORD}
+          PGADMIN_LISTEN_PORT: 8080
+        ports:
+          - "172.17.0.1:55871:8080"
+        volumes:
+          - ./servers.json:/pgadmin4/servers.json
 
 
 ### Environment variables
